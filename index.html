@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopTell — Find It, Compare It, Buy It</title>
+<meta name="description" content="Hand-picked products on Amazon.in across tech, fashion, home, beauty, and more — organized by category, with straight-to-the-point picks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-alt:#f5f5f5;
+    --ink:#111111;
+    --ink-soft:#5a5a5a;
+    --line:#e3e3e3;
+    --accent:#1d4ed8;
+    --accent-ink:#ffffff;
+    --radius:2px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.logo{
+    font-family:'Space Grotesk', sans-serif;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* Header */
+  header{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 24px;
+  }
+  .logo{
+    font-size:20px;
+    font-weight:700;
+  }
+  .logo span{color:var(--accent);}
+  nav.top-nav{
+    display:flex;
+    align-items:center;
+  }
+  .category-nav-select{
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    font-weight:500;
+    color:var(--ink);
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:9px 12px;
+    cursor:pointer;
+  }
+  .category-nav-select:hover{border-color:var(--ink);}
+
+  /* Hero */
+  .hero{
+    padding:96px 24px 72px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero .eyebrow{
+    font-size:12px;
+    color:var(--accent);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-weight:600;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(34px, 5vw, 56px);
+    line-height:1.05;
+    font-weight:700;
+    max-width:780px;
+    margin:0 0 20px;
+  }
+  .hero p{
+    font-size:17px;
+    color:var(--ink-soft);
+    max-width:520px;
+    line-height:1.6;
+    margin:0 0 32px;
+  }
+  .hero-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--ink);
+    color:#fff;
+    padding:13px 22px;
+    font-size:14px;
+    font-weight:600;
+    border-radius:var(--radius);
+  }
+  .hero-cta:hover{background:var(--accent);}
+
+  .search-bar{
+    display:flex;
+    max-width:520px;
+    margin:0 0 28px;
+    border:1px solid var(--ink);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .search-input{
+    flex:1;
+    border:none;
+    outline:none;
+    padding:14px 16px;
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    color:var(--ink);
+    background:#fff;
+  }
+  .search-input::placeholder{color:#a0a0a0;}
+  .search-btn{
+    border:none;
+    background:var(--ink);
+    color:#fff;
+    padding:0 24px;
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .search-btn:hover{background:var(--accent);}
+
+  /* Seasonal picks */
+  .seasonal-hub{
+    background:var(--bg-alt);
+    padding:48px 24px 56px;
+    border-bottom:1px solid var(--line);
+  }
+  .seasonal-head{
+    margin-bottom:28px;
+  }
+  .seasonal-head h2{
+    font-size:24px;
+    font-weight:600;
+    margin:0 0 6px;
+  }
+  .seasonal-sub{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  .seasonal-block .card{
+    background:#fff;
+  }
+
+  /* Disclosure strip */
+  .disclosure{
+    background:var(--bg-alt);
+    border-top:1px solid var(--line);
+    font-size:12.5px;
+    color:var(--ink-soft);
+    padding:10px 24px;
+    text-align:center;
+  }
+
+  /* Category filter */
+  .filter-bar{
+    position:sticky;
+    top:65px;
+    z-index:9;
+    background:var(--bg);
+    border-bottom:1px solid var(--line);
+    padding:14px 24px;
+  }
+  .filter-inner{
+    max-width:1120px;
+    margin:0 auto;
+  }
+  .filter-select{
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    font-weight:500;
+    color:var(--ink);
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:10px 14px;
+    cursor:pointer;
+    max-width:320px;
+  }
+  .filter-select:hover{border-color:var(--ink);}
+
+  /* Product sections */
+  .category-section{
+    padding:64px 24px 16px;
+  }
+  .category-head{
+    margin-bottom:32px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:14px;
+  }
+  .category-head h2{
+    font-size:22px;
+    font-weight:600;
+    margin:0;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+    gap:20px;
+    margin-bottom:8px;
+  }
+
+  .card{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    transition:border-color 0.15s ease;
+  }
+  .card:hover{
+    border-color:var(--ink);
+  }
+
+  .card-img{
+    height:140px;
+    border-radius:var(--radius);
+    background:var(--bg-alt);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:16px;
+    font-family:'Inter', sans-serif;
+    font-size:12px;
+    color:#b3b3b3;
+  }
+  .card-tag{
+    font-family:'Inter', sans-serif;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+  .card h3{
+    font-size:17px;
+    font-weight:600;
+    margin:0 0 8px;
+  }
+  .card p{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    line-height:1.55;
+    margin:0 0 18px;
+    flex-grow:1;
+  }
+  .card-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .price{
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    color:var(--ink);
+  }
+  .buy-btn{
+    font-size:13px;
+    font-weight:600;
+    background:var(--ink);
+    color:#fff;
+    padding:9px 14px;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .buy-btn:hover{background:var(--accent);}
+
+  /* Footer */
+  footer{
+    margin-top:80px;
+    border-top:1px solid var(--line);
+    padding:40px 24px 32px;
+  }
+  .footer-inner{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:24px;
+    align-items:flex-start;
+  }
+  footer .logo{font-size:16px;}
+  footer p{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    line-height:1.6;
+    max-width:520px;
+    margin:10px 0 0;
+  }
+  .footer-meta{
+    font-family:'Inter', sans-serif;
+    font-size:12px;
+    color:#a0a0a0;
+    margin-top:24px;
+  }
+
+  @media (max-width:640px){
+    .header-inner{padding:14px 18px;}
+    .category-nav-select{max-width:150px;font-size:13px;}
+    .hero{padding:56px 18px 48px;}
+    .category-section{padding:48px 18px 8px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">Shop<span>Tell</span></div>
+    <nav class="top-nav">
+      <select class="category-nav-select" onchange="if(this.value) window.location.hash = this.value;">
+        <option value="">Browse categories</option>
+      <option value="audio">Audio</option>
+      <option value="smart-home">Smart Home</option>
+      <option value="everyday-carry">Everyday Carry</option>
+      <option value="desk-work">Desk &amp; Work</option>
+      <option value="mobile-accessories">Mobile Accessories</option>
+      <option value="computers">Personal Computers</option>
+      <option value="smart-watches">Smart Watches</option>
+      <option value="tv-electronics">TV, Appliances & Electronics</option>
+      <option value="mens-fashion">Men's Fashion</option>
+      <option value="womens-fashion">Women's Fashion</option>
+      <option value="fashion-travel">Shoes, Luggage & Bags, Watches</option>
+      <option value="beauty">Beauty, Health & Grocery</option>
+      <option value="home-kitchen-pets">Home, Kitchen & Pets</option>
+      <option value="sports-fitness">Sports, Fitness & Outdoors</option>
+      <option value="toys-baby-kids">Toys, Baby Products & Kids' Fashion</option>
+      <option value="car-motorbike">Car, Motorbike & Industrial</option>
+      <option value="books">Books</option>
+      <option value="movies-games">Movies, Music & Video Games</option>
+      <option value="digital-devices">Digital Devices</option>
+      </select>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Shop Smarter</div>
+    <h1>Find it, buy it — sorted so you don't have to dig.</h1>
+    <p>ShopTell rounds up genuinely useful products on Amazon.in across tech, fashion, home, and more. Search directly below, or browse picks by category.</p>
+
+    <form action="/search" method="GET" class="search-bar" role="search">
+      <input type="text" name="q" class="search-input" placeholder="Search for a product on Amazon…" aria-label="Search Amazon" required>
+      <button type="submit" class="search-btn">Search</button>
+    </form>
+
+    <a href="#audio" class="hero-cta">Browse picks ↓</a>
+  </div>
+</section>
+
+
+<section class="seasonal-hub" id="seasonal-hub">
+  <div class="wrap">
+    <div class="seasonal-head">
+      <h2 id="seasonalHeading">Trending This Season</h2>
+      <p class="seasonal-sub" id="seasonalSub">What's popular across India right now.</p>
+    </div>
+
+    <div class="grid seasonal-block" data-season="summer" data-emoji="☀️" data-label="Summer Picks" data-sub="Beat the heat — what's trending across India right now." style="display:none;">
+
+      <div class="card" data-asin="B0REPLACE58">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Tower Fan</div>
+        <h3>Tower Fan</h3>
+        <p>Oscillating tower fan with quiet operation, good for bedrooms and living rooms.</p>
+        <div class="card-footer">
+          <span class="price">₹5,000–₹9,500</span>
+          <a href="/go/B0REPLACE58" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE59">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Air Cooler</div>
+        <h3>Portable Air Cooler</h3>
+        <p>Evaporative cooling for the peak months, with wheels to move it room to room.</p>
+        <div class="card-footer">
+          <span class="price">₹6,500–₹13,500</span>
+          <a href="/go/B0REPLACE59" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE60">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Sunscreen</div>
+        <h3>Sunscreen SPF Lotion</h3>
+        <p>Lightweight, non-greasy sunscreen for daily outdoor use.</p>
+        <div class="card-footer">
+          <span class="price">₹350–₹800</span>
+          <a href="/go/B0REPLACE60" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE61">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Travel Bag</div>
+        <h3>Travel Duffel Bag</h3>
+        <p>Foldable duffel for weekend trips, with a separate shoe compartment.</p>
+        <div class="card-footer">
+          <span class="price">₹1,200–₹2,800</span>
+          <a href="/go/B0REPLACE61" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+    <div class="grid seasonal-block" data-season="monsoon" data-emoji="🌧️" data-label="Monsoon Picks" data-sub="Rain-ready essentials that spike every year around this time." style="display:none;">
+
+      <div class="card" data-asin="B0REPLACE62">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Raincoat</div>
+        <h3>Raincoat</h3>
+        <p>Full-cover raincoat with a hood, packable into its own pouch.</p>
+        <div class="card-footer">
+          <span class="price">₹800–₹1,800</span>
+          <a href="/go/B0REPLACE62" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE63">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Umbrella</div>
+        <h3>Compact Umbrella</h3>
+        <p>Windproof folding umbrella that actually survives monsoon gusts.</p>
+        <div class="card-footer">
+          <span class="price">₹400–₹1,000</span>
+          <a href="/go/B0REPLACE63" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE64">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Shoe Covers</div>
+        <h3>Waterproof Shoe Covers</h3>
+        <p>Reusable covers that slip over shoes to keep them dry on the commute.</p>
+        <div class="card-footer">
+          <span class="price">₹300–₹700</span>
+          <a href="/go/B0REPLACE64" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE65">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Mosquito Repellent</div>
+        <h3>Mosquito Repellent Machine</h3>
+        <p>Plug-in repellent for keeping rooms mosquito-free through the season.</p>
+        <div class="card-footer">
+          <span class="price">₹250–₹600</span>
+          <a href="/go/B0REPLACE65" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+    <div class="grid seasonal-block" data-season="festive" data-emoji="🪔" data-label="Festive Season Picks" data-sub="Lighting, gifting, and decor — the run-up to the big festivals." style="display:none;">
+
+      <div class="card" data-asin="B0REPLACE66">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">String Lights</div>
+        <h3>LED String Lights</h3>
+        <p>Warm-white string lights for balconies, doorways, and diyas.</p>
+        <div class="card-footer">
+          <span class="price">₹300–₹900</span>
+          <a href="/go/B0REPLACE66" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE67">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Gift Hamper</div>
+        <h3>Gift Hamper Box</h3>
+        <p>A ready-to-gift assortment box for festive visits and exchanges.</p>
+        <div class="card-footer">
+          <span class="price">₹900–₹2,500</span>
+          <a href="/go/B0REPLACE67" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE68">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Ethnic Wear</div>
+        <h3>Ethnic Wear Kurta Set</h3>
+        <p>Festive-ready kurta set for men or women, easy to dress up or down.</p>
+        <div class="card-footer">
+          <span class="price">₹1,200–₹3,500</span>
+          <a href="/go/B0REPLACE68" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE69">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Home Decor</div>
+        <h3>Decorative Table Lantern</h3>
+        <p>A decorative lantern piece that doubles as festive home decor year-round.</p>
+        <div class="card-footer">
+          <span class="price">₹500–₹1,400</span>
+          <a href="/go/B0REPLACE69" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+    <div class="grid seasonal-block" data-season="winter" data-emoji="❄️" data-label="Winter Picks" data-sub="Warmth essentials as the temperature drops." style="display:none;">
+
+      <div class="card" data-asin="B0REPLACE70">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Blanket</div>
+        <h3>Fleece Blanket</h3>
+        <p>Soft double-bed blanket, warm enough for most Indian winters without bulk.</p>
+        <div class="card-footer">
+          <span class="price">₹900–₹2,200</span>
+          <a href="/go/B0REPLACE70" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE71">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Room Heater</div>
+        <h3>Room Heater</h3>
+        <p>Compact room heater that warms a small bedroom or study within minutes.</p>
+        <div class="card-footer">
+          <span class="price">₹1,800–₹4,500</span>
+          <a href="/go/B0REPLACE71" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE72">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Thermals</div>
+        <h3>Thermal Innerwear Set</h3>
+        <p>Top-and-bottom thermal set for layering under regular clothes.</p>
+        <div class="card-footer">
+          <span class="price">₹700–₹1,600</span>
+          <a href="/go/B0REPLACE72" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE73">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Hot Water Bottle</div>
+        <h3>Hot Water Bottle Bag</h3>
+        <p>A classic rubber bottle with a soft cover for cold nights.</p>
+        <div class="card-footer">
+          <span class="price">₹300–₹700</span>
+          <a href="/go/B0REPLACE73" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+    <div class="grid seasonal-block" data-season="back-to-school" data-emoji="🎒" data-label="Back-to-School Picks" data-sub="Getting ready for the new academic year." style="display:none;">
+
+      <div class="card" data-asin="B0REPLACE74">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Backpack</div>
+        <h3>School Backpack</h3>
+        <p>Padded-strap backpack with a laptop sleeve and multiple compartments.</p>
+        <div class="card-footer">
+          <span class="price">₹1,200–₹2,800</span>
+          <a href="/go/B0REPLACE74" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE75">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Stationery Kit</div>
+        <h3>Stationery Combo Kit</h3>
+        <p>A full set covering pens, pencils, geometry box, and notebooks.</p>
+        <div class="card-footer">
+          <span class="price">₹400–₹900</span>
+          <a href="/go/B0REPLACE75" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE76">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Lunch Box</div>
+        <h3>Lunch Box Set</h3>
+        <p>Leak-proof, multi-compartment lunch box with an insulated bag.</p>
+        <div class="card-footer">
+          <span class="price">₹350–₹800</span>
+          <a href="/go/B0REPLACE76" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE77">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Water Bottle</div>
+        <h3>Kids' Steel Water Bottle</h3>
+        <p>Insulated steel bottle sized for a school bag, keeps water cool for hours.</p>
+        <div class="card-footer">
+          <span class="price">₹350–₹750</span>
+          <a href="/go/B0REPLACE77" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="filter-bar">
+  <div class="filter-inner">
+    <select class="filter-select" id="categoryFilter">
+      <option value="all">All categories</option>
+      <option value="audio">Audio</option>
+      <option value="smart-home">Smart Home</option>
+      <option value="everyday-carry">Everyday Carry</option>
+      <option value="desk-work">Desk &amp; Work</option>
+      <option value="mobile-accessories">Mobile Accessories</option>
+      <option value="computers">Personal Computers</option>
+      <option value="smart-watches">Smart Watches</option>
+      <option value="tv-electronics">TV, Appliances & Electronics</option>
+      <option value="mens-fashion">Men's Fashion</option>
+      <option value="womens-fashion">Women's Fashion</option>
+      <option value="fashion-travel">Shoes, Luggage & Bags, Watches</option>
+      <option value="beauty">Beauty, Health & Grocery</option>
+      <option value="home-kitchen-pets">Home, Kitchen & Pets</option>
+      <option value="sports-fitness">Sports, Fitness & Outdoors</option>
+      <option value="toys-baby-kids">Toys, Baby Products & Kids' Fashion</option>
+      <option value="car-motorbike">Car, Motorbike & Industrial</option>
+      <option value="books">Books</option>
+      <option value="movies-games">Movies, Music & Video Games</option>
+      <option value="digital-devices">Digital Devices</option>
+    </select>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section class="category-section" id="audio" data-category="audio">
+    <div class="category-head">      <h2>Audio</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE01">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Earbuds</div>
+        <h3>Noise-Cancelling Earbuds</h3>
+        <p>Compact true-wireless buds with active noise cancellation — good for commutes and open offices.</p>
+        <div class="card-footer">
+          <span class="price">₹5,000–₹11,000</span>
+          <a href="/go/B0REPLACE01" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+
+      <div class="card" data-asin="B0REPLACE02">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Speaker</div>
+        <h3>Portable Bluetooth Speaker</h3>
+        <p>Pocketable, water-resistant speaker with enough bass for a backyard hangout or a shower singalong.</p>
+        <div class="card-footer">
+          <span class="price">₹3,000–₹6,800</span>
+          <a href="/go/B0REPLACE02" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+
+      <div class="card" data-asin="B0REPLACE03">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Headphones</div>
+        <h3>Over-Ear Studio Headphones</h3>
+        <p>Wired or wireless over-ears built for long focus sessions — comfortable padding, flat sound profile.</p>
+        <div class="card-footer">
+          <span class="price">₹7,600–₹18,700</span>
+          <a href="/go/B0REPLACE03" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="category-section" id="smart-home" data-category="smart-home">
+    <div class="category-head">      <h2>Smart Home</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE04">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Smart Plug</div>
+        <h3>Smart Plug 4-Pack</h3>
+        <p>Turn any lamp or appliance into a scheduled, voice-controlled device — no wiring, five-minute setup.</p>
+        <div class="card-footer">
+          <span class="price">₹1,700–₹3,000</span>
+          <a href="/go/B0REPLACE04" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+
+      <div class="card" data-asin="B0REPLACE05">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Doorbell</div>
+        <h3>Video Doorbell</h3>
+        <p>See and speak to whoever's at the door from your phone, with motion alerts and clip history.</p>
+        <div class="card-footer">
+          <span class="price">₹5,100–₹12,800</span>
+          <a href="/go/B0REPLACE05" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+
+      <div class="card" data-asin="B0REPLACE06">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Lighting</div>
+        <h3>Smart LED Strip Lights</h3>
+        <p>App- and voice-controlled strip lighting with millions of colors — an easy upgrade for a desk or shelf.</p>
+        <div class="card-footer">
+          <span class="price">₹1,550–₹3,800</span>
+          <a href="/go/B0REPLACE06" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="category-section" id="everyday-carry" data-category="everyday-carry">
+    <div class="category-head">      <h2>Everyday Carry</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE07">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Power Bank</div>
+        <h3>Fast-Charging Power Bank</h3>
+        <p>Slim enough for a jacket pocket, with enough capacity for a full phone charge plus change.</p>
+        <div class="card-footer">
+          <span class="price">₹1,850–₹4,250</span>
+          <a href="/go/B0REPLACE07" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+
+      <div class="card" data-asin="B0REPLACE08">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">USB-C Hub</div>
+        <h3>Multi-Port USB-C Hub</h3>
+        <p>One dongle for HDMI, USB-A, and card readers — handy for laptops that shipped with too few ports.</p>
+        <div class="card-footer">
+          <span class="price">₹2,100–₹5,100</span>
+          <a href="/go/B0REPLACE08" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+
+      <div class="card" data-asin="B0REPLACE09">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Wireless Charger</div>
+        <h3>Slim Wireless Charging Pad</h3>
+        <p>Drop your phone and go — a low-profile charging pad that fits neatly on a nightstand or desk corner.</p>
+        <div class="card-footer">
+          <span class="price">₹1,300–₹3,000</span>
+          <a href="/go/B0REPLACE09" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="category-section" id="desk-work" data-category="desk-work">
+    <div class="category-head">      <h2>Desk &amp; Work</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE10">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Keyboard</div>
+        <h3>Mechanical Keyboard</h3>
+        <p>Tactile switches and a compact layout — built for people who type all day and can feel the difference.</p>
+        <div class="card-footer">
+          <span class="price">₹3,800–₹9,400</span>
+          <a href="/go/B0REPLACE10" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+
+      <div class="card" data-asin="B0REPLACE11">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Mouse</div>
+        <h3>Ergonomic Wireless Mouse</h3>
+        <p>A vertical grip that keeps your wrist neutral through long work sessions, with quiet clicks.</p>
+        <div class="card-footer">
+          <span class="price">₹2,100–₹4,700</span>
+          <a href="/go/B0REPLACE11" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+
+      <div class="card" data-asin="B0REPLACE12">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Laptop Stand</div>
+        <h3>Adjustable Laptop Stand</h3>
+        <p>Raises your screen to eye level and folds flat for travel — an easy fix for hunched-over posture.</p>
+        <div class="card-footer">
+          <span class="price">₹1,700–₹3,800</span>
+          <a href="/go/B0REPLACE12" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="category-section" id="mobile-accessories" data-category="mobile-accessories">
+    <div class="category-head">      <h2>Mobile Accessories</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE13">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Phone Case</div>
+        <h3>Phone Case with Card Holder</h3>
+        <p>Slim protective case with a built-in slot for a card or two — one less thing to carry.</p>
+        <div class="card-footer">
+          <span class="price">₹1,000–₹2,100</span>
+          <a href="/go/B0REPLACE13" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE14">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Screen Protector</div>
+        <h3>Tempered Glass Screen Protector (2-Pack)</h3>
+        <p>Bubble-free glass protection that installs in under a minute, no bubbles left behind.</p>
+        <div class="card-footer">
+          <span class="price">₹680–₹1,300</span>
+          <a href="/go/B0REPLACE14" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE15">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Car Mount</div>
+        <h3>Magnetic Car Phone Mount</h3>
+        <p>Snap-in magnetic mount for the dashboard or vent — one-handed to attach or remove.</p>
+        <div class="card-footer">
+          <span class="price">₹850–₹1,850</span>
+          <a href="/go/B0REPLACE15" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="category-section" id="computers" data-category="computers">
+    <div class="category-head">      <h2>Personal Computers</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE16">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Mini PC</div>
+        <h3>Compact Mini PC</h3>
+        <p>A full desktop's worth of power in a box the size of a paperback — good for a small desk.</p>
+        <div class="card-footer">
+          <span class="price">₹15,300–₹29,800</span>
+          <a href="/go/B0REPLACE16" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE17">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Monitor</div>
+        <h3>27-Inch Full HD Monitor</h3>
+        <p>Slim-bezel monitor with enough screen real estate for side-by-side windows.</p>
+        <div class="card-footer">
+          <span class="price">₹11,000–₹18,700</span>
+          <a href="/go/B0REPLACE17" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE18">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">External SSD</div>
+        <h3>External SSD Drive</h3>
+        <p>Pocket-sized, fast enough for video editing on the go, sturdier than a spinning drive.</p>
+        <div class="card-footer">
+          <span class="price">₹3,800–₹7,600</span>
+          <a href="/go/B0REPLACE18" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="category-section" id="smart-watches" data-category="smart-watches">
+    <div class="category-head">      <h2>Smart Watches</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE19">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Fitness Tracker</div>
+        <h3>Fitness Tracker Smartwatch</h3>
+        <p>Tracks steps, heart rate, and sleep, with a battery that lasts most of a week.</p>
+        <div class="card-footer">
+          <span class="price">₹2,550–₹6,000</span>
+          <a href="/go/B0REPLACE19" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE20">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Kids' Watch</div>
+        <h3>Kids' GPS Smartwatch</h3>
+        <p>Location sharing and calling for younger kids, with parent-controlled contacts.</p>
+        <div class="card-footer">
+          <span class="price">₹3,000–₹5,100</span>
+          <a href="/go/B0REPLACE20" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE21">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">AMOLED Watch</div>
+        <h3>AMOLED Smartwatch with Call Support</h3>
+        <p>A brighter always-on display and Bluetooth calling for a more phone-like feel.</p>
+        <div class="card-footer">
+          <span class="price">₹3,800–₹7,600</span>
+          <a href="/go/B0REPLACE21" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="category-section" id="tv-electronics" data-category="tv-electronics">
+    <div class="category-head">      <h2>TV, Appliances & Electronics</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE22">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Projector</div>
+        <h3>Portable Projector</h3>
+        <p>Turns a blank wall into a movie screen — compact enough to pack for a trip.</p>
+        <div class="card-footer">
+          <span class="price">₹5,100–₹12,800</span>
+          <a href="/go/B0REPLACE22" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE23">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Photo Printer</div>
+        <h3>Instant Photo Printer</h3>
+        <p>Prints straight from your phone over Bluetooth — good for scrapbooks and gifts.</p>
+        <div class="card-footer">
+          <span class="price">₹6,000–₹10,200</span>
+          <a href="/go/B0REPLACE23" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE24">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Photo Frame</div>
+        <h3>Digital Photo Frame</h3>
+        <p>Wi-Fi frame that updates with new photos sent from a phone, no SD card needed.</p>
+        <div class="card-footer">
+          <span class="price">₹3,400–₹6,800</span>
+          <a href="/go/B0REPLACE24" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="category-section" id="mens-fashion" data-category="mens-fashion">
+    <div class="category-head">      <h2>Men's Fashion</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE25">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Casual Shirt</div>
+        <h3>Slim-Fit Casual Shirt</h3>
+        <p>Breathable everyday shirt that works equally well tucked in or left loose.</p>
+        <div class="card-footer">
+          <span class="price">₹1,300–₹2,550</span>
+          <a href="/go/B0REPLACE25" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE26">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Leather Belt</div>
+        <h3>Classic Leather Belt</h3>
+        <p>A simple, well-stitched belt that will outlast most of what's in your closet.</p>
+        <div class="card-footer">
+          <span class="price">₹1,000–₹2,100</span>
+          <a href="/go/B0REPLACE26" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE27">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Chinos</div>
+        <h3>Everyday Chino Trousers</h3>
+        <p>A flexible-fit pair that moves between the office and the weekend.</p>
+        <div class="card-footer">
+          <span class="price">₹1,700–₹3,400</span>
+          <a href="/go/B0REPLACE27" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="category-section" id="womens-fashion" data-category="womens-fashion">
+    <div class="category-head">      <h2>Women's Fashion</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE28">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Midi Dress</div>
+        <h3>Wrap Midi Dress</h3>
+        <p>An easy silhouette that works for most body types, dressed up or down.</p>
+        <div class="card-footer">
+          <span class="price">₹1,550–₹3,000</span>
+          <a href="/go/B0REPLACE28" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE29">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Tote Bag</div>
+        <h3>Everyday Tote Bag</h3>
+        <p>Roomy enough for a laptop and groceries, sturdy enough for daily use.</p>
+        <div class="card-footer">
+          <span class="price">₹1,850–₹3,800</span>
+          <a href="/go/B0REPLACE29" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE30">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Leggings</div>
+        <h3>High-Waist Leggings</h3>
+        <p>Squat-proof fabric with a waistband that actually stays put.</p>
+        <div class="card-footer">
+          <span class="price">₹1,200–₹2,400</span>
+          <a href="/go/B0REPLACE30" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="category-section" id="fashion-travel" data-category="fashion-travel">
+    <div class="category-head">      <h2>Shoes, Luggage & Bags, Watches</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE31">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Running Shoes</div>
+        <h3>Running Shoes</h3>
+        <p>Cushioned everyday trainers for road runs or just being on your feet all day.</p>
+        <div class="card-footer">
+          <span class="price">₹2,100–₹4,700</span>
+          <a href="/go/B0REPLACE31" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE32">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Cabin Luggage</div>
+        <h3>Hardshell Cabin Luggage</h3>
+        <p>Fits most airline size limits, with spinner wheels that don't wobble.</p>
+        <div class="card-footer">
+          <span class="price">₹4,250–₹8,100</span>
+          <a href="/go/B0REPLACE32" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE33">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Wrist Watch</div>
+        <h3>Analog Wrist Watch</h3>
+        <p>A no-fuss dial that pairs with everything from gym clothes to a suit.</p>
+        <div class="card-footer">
+          <span class="price">₹1,700–₹3,800</span>
+          <a href="/go/B0REPLACE33" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="category-section" id="beauty" data-category="beauty">
+    <div class="category-head">      <h2>Beauty, Health & Grocery</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE34">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Hair Dryer</div>
+        <h3>Hair Dryer</h3>
+        <p>Fast-drying with a cool-shot button to lock in a style without the frizz.</p>
+        <div class="card-footer">
+          <span class="price">₹1,550–₹3,000</span>
+          <a href="/go/B0REPLACE34" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE35">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Trimmer Kit</div>
+        <h3>Grooming & Trimmer Kit</h3>
+        <p>Multiple guard lengths in one kit — beard, body, and detail trimming covered.</p>
+        <div class="card-footer">
+          <span class="price">₹1,300–₹2,550</span>
+          <a href="/go/B0REPLACE35" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE36">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Skincare Set</div>
+        <h3>Skincare Gift Set</h3>
+        <p>A starter set covering cleanser, moisturizer, and SPF in travel-friendly sizes.</p>
+        <div class="card-footer">
+          <span class="price">₹1,700–₹3,400</span>
+          <a href="/go/B0REPLACE36" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="category-section" id="home-kitchen-pets" data-category="home-kitchen-pets">
+    <div class="category-head">      <h2>Home, Kitchen & Pets</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE37">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Cookware Set</div>
+        <h3>Non-Stick Cookware Set</h3>
+        <p>A starter set that covers most weeknight cooking without the sticking.</p>
+        <div class="card-footer">
+          <span class="price">₹2,550–₹5,100</span>
+          <a href="/go/B0REPLACE37" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE38">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Robot Vacuum</div>
+        <h3>Robot Vacuum Cleaner</h3>
+        <p>Set a schedule and let it handle daily crumbs and pet hair on its own.</p>
+        <div class="card-footer">
+          <span class="price">₹7,600–₹15,300</span>
+          <a href="/go/B0REPLACE38" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE39">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Pet Grooming Kit</div>
+        <h3>Pet Grooming Kit</h3>
+        <p>Clippers, brush, and nail trimmer in one kit for at-home grooming.</p>
+        <div class="card-footer">
+          <span class="price">₹1,300–₹2,400</span>
+          <a href="/go/B0REPLACE39" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="category-section" id="sports-fitness" data-category="sports-fitness">
+    <div class="category-head">      <h2>Sports, Fitness & Outdoors</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE40">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Dumbbell Set</div>
+        <h3>Adjustable Dumbbell Set</h3>
+        <p>Swaps out plates in seconds — replaces a whole rack in a small footprint.</p>
+        <div class="card-footer">
+          <span class="price">₹3,400–₹6,800</span>
+          <a href="/go/B0REPLACE40" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE41">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Yoga Mat</div>
+        <h3>Yoga Mat with Carry Strap</h3>
+        <p>Enough cushioning for floor work, thin enough to roll and carry easily.</p>
+        <div class="card-footer">
+          <span class="price">₹1,000–₹1,850</span>
+          <a href="/go/B0REPLACE41" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE42">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Water Bottle</div>
+        <h3>Insulated Water Bottle</h3>
+        <p>Keeps drinks cold through a full workday, no sweating on your desk.</p>
+        <div class="card-footer">
+          <span class="price">₹850–₹1,550</span>
+          <a href="/go/B0REPLACE42" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="category-section" id="toys-baby-kids" data-category="toys-baby-kids">
+    <div class="category-head">      <h2>Toys, Baby Products & Kids' Fashion</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE43">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Building Blocks</div>
+        <h3>Building Blocks Set</h3>
+        <p>Open-ended building pieces that keep working as a kid's imagination grows.</p>
+        <div class="card-footer">
+          <span class="price">₹1,550–₹3,000</span>
+          <a href="/go/B0REPLACE43" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE44">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Diaper Bag</div>
+        <h3>Baby Diaper Bag Backpack</h3>
+        <p>Enough compartments to keep bottles, wipes, and spares actually organized.</p>
+        <div class="card-footer">
+          <span class="price">₹2,100–₹3,800</span>
+          <a href="/go/B0REPLACE44" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE45">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Kids' T-Shirts</div>
+        <h3>Kids' Graphic T-Shirt Pack</h3>
+        <p>A multi-pack of everyday tees built to survive the laundry a lot.</p>
+        <div class="card-footer">
+          <span class="price">₹1,000–₹1,700</span>
+          <a href="/go/B0REPLACE45" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="category-section" id="car-motorbike" data-category="car-motorbike">
+    <div class="category-head">      <h2>Car, Motorbike & Industrial</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE46">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Dash Cam</div>
+        <h3>Dash Cam with Night Vision</h3>
+        <p>Records automatically on the drive, with a loop so you never run out of space.</p>
+        <div class="card-footer">
+          <span class="price">₹3,000–₹6,000</span>
+          <a href="/go/B0REPLACE46" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE47">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Tire Gauge</div>
+        <h3>Tire Pressure Gauge</h3>
+        <p>A small glovebox tool that pays for itself the first time it prevents a flat.</p>
+        <div class="card-footer">
+          <span class="price">₹680–₹1,300</span>
+          <a href="/go/B0REPLACE47" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE48">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Riding Gloves</div>
+        <h3>Motorbike Riding Gloves</h3>
+        <p>Grippy palms and knuckle protection for daily commuting on two wheels.</p>
+        <div class="card-footer">
+          <span class="price">₹1,300–₹2,400</span>
+          <a href="/go/B0REPLACE48" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="category-section" id="books" data-category="books">
+    <div class="category-head">      <h2>Books</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE49">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Fiction Paperback</div>
+        <h3>Bestselling Fiction Paperback</h3>
+        <p>A page-turner that's easy to start without much commitment.</p>
+        <div class="card-footer">
+          <span class="price">₹680–₹1,200</span>
+          <a href="/go/B0REPLACE49" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE50">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Finance Guide</div>
+        <h3>Personal Finance Guide</h3>
+        <p>A plain-language starting point for budgeting and saving basics.</p>
+        <div class="card-footer">
+          <span class="price">₹850–₹1,550</span>
+          <a href="/go/B0REPLACE50" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE51">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Cookbook</div>
+        <h3>Illustrated Cookbook</h3>
+        <p>Step-by-step recipes with photos for every dish, good for beginners.</p>
+        <div class="card-footer">
+          <span class="price">₹1,300–₹2,100</span>
+          <a href="/go/B0REPLACE51" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="category-section" id="movies-games" data-category="movies-games">
+    <div class="category-head">      <h2>Movies, Music & Video Games</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE52">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Game Controller</div>
+        <h3>Wireless Gaming Controller</h3>
+        <p>A comfortable, low-latency controller that works across most modern consoles.</p>
+        <div class="card-footer">
+          <span class="price">₹2,100–₹3,800</span>
+          <a href="/go/B0REPLACE52" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE53">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Blu-ray Set</div>
+        <h3>Blu-ray Boxed Set</h3>
+        <p>A full collection in one case — no hunting for individual discs.</p>
+        <div class="card-footer">
+          <span class="price">₹1,300–₹2,550</span>
+          <a href="/go/B0REPLACE53" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE54">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Gaming Headset</div>
+        <h3>Gaming Headset</h3>
+        <p>Clear in-game audio and a mic that keeps teammates from asking you to repeat yourself.</p>
+        <div class="card-footer">
+          <span class="price">₹2,550–₹4,700</span>
+          <a href="/go/B0REPLACE54" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="category-section" id="digital-devices" data-category="digital-devices">
+    <div class="category-head">      <h2>Digital Devices</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-asin="B0REPLACE55">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Smart Speaker</div>
+        <h3>Smart Speaker</h3>
+        <p>Voice-controlled speaker for music, timers, and smart home control.</p>
+        <div class="card-footer">
+          <span class="price">₹2,100–₹4,250</span>
+          <a href="/go/B0REPLACE55" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE56">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">Streaming Stick</div>
+        <h3>Streaming Media Stick</h3>
+        <p>Plugs into any TV's HDMI port and turns it into a smart TV in minutes.</p>
+        <div class="card-footer">
+          <span class="price">₹2,550–₹4,250</span>
+          <a href="/go/B0REPLACE56" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+      <div class="card" data-asin="B0REPLACE57">
+        <div class="card-img">Product Image</div>
+        <div class="card-tag">E-Reader</div>
+        <h3>E-Reader</h3>
+        <p>A glare-free display built for reading, with weeks of battery life.</p>
+        <div class="card-footer">
+          <span class="price">₹6,800–₹11,900</span>
+          <a href="/go/B0REPLACE57" class="buy-btn" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>
+      <div class="logo">Shop<span style="color:var(--accent);">Tell</span></div>
+      <p>ShopTell is an independent site sharing tech gadget picks. We may earn a commission on purchases made through links on this page, at no extra cost to you.</p>
+    </div>
+    <div class="footer-meta">© 2026 shoptell.in — built with care.</div>
+  </div>
+</footer>
+
+<div class="disclosure">
+  As an Amazon Associate (Amazon.in), ShopTell earns from qualifying purchases. Prices shown are estimates in INR and may change.
+</div>
+
+<script>
+  // --- Seasonal picks: auto-selected by the visitor's current month ---
+  // No cron job or manual refresh needed — this just runs fresh every time
+  // the page loads, using the browser's current date. Edit MONTH_TO_SEASON
+  // below if your calendar assumptions (India-focused, see comments) don't
+  // match your audience or region.
+  const MONTH_TO_SEASON = {
+    0: 'winter',          // Jan
+    1: 'winter',          // Feb
+    2: 'back-to-school',  // Mar
+    3: 'summer',          // Apr
+    4: 'summer',          // May
+    5: 'summer',          // Jun
+    6: 'monsoon',         // Jul
+    7: 'monsoon',         // Aug
+    8: 'monsoon',         // Sep
+    9: 'festive',         // Oct
+    10: 'festive',        // Nov
+    11: 'winter',         // Dec
+  };
+
+  (function showSeasonalPicks() {
+    const month = new Date().getMonth();
+    const season = MONTH_TO_SEASON[month];
+    const blocks = document.querySelectorAll('.seasonal-block');
+    let matched = null;
+
+    blocks.forEach(block => {
+      if (block.dataset.season === season) {
+        block.style.display = '';
+        matched = block;
+      } else {
+        block.style.display = 'none';
+      }
+    });
+
+    if (matched) {
+      const heading = document.getElementById('seasonalHeading');
+      const sub = document.getElementById('seasonalSub');
+      if (heading) heading.textContent = `${matched.dataset.emoji} ${matched.dataset.label}`;
+      if (sub) sub.textContent = matched.dataset.sub;
+    }
+  })();
+
+  const categoryFilter = document.getElementById('categoryFilter');
+  const sections = document.querySelectorAll('.category-section');
+
+  categoryFilter.addEventListener('change', () => {
+    const filter = categoryFilter.value;
+    sections.forEach(sec => {
+      sec.style.display = (filter === 'all' || sec.dataset.category === filter) ? '' : 'none';
+    });
+    if (filter !== 'all') {
+      document.getElementById(filter).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+
+  // --- Live product data from Amazon's Creators API (via /api/products) ---
+  // If the API isn't configured yet, or a card's ASIN is still a placeholder
+  // (starts with "B0REPLACE"), the card just keeps its static fallback
+  // content — nothing breaks.
+  (function loadLiveProductData() {
+    const cards = Array.from(document.querySelectorAll('.card[data-asin]'))
+      .filter(card => !card.dataset.asin.startsWith('B0REPLACE'));
+
+    if (cards.length === 0) return;
+
+    const chunkSize = 10;
+    for (let i = 0; i < cards.length; i += chunkSize) {
+      const chunk = cards.slice(i, i + chunkSize);
+      const ids = chunk.map(c => c.dataset.asin).join(',');
+
+      fetch(`/api/products?ids=${encodeURIComponent(ids)}`)
+        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(data => {
+          if (!data.items) return;
+          data.items.forEach(item => {
+            const card = chunk.find(c => c.dataset.asin === item.asin);
+            if (!card) return;
+
+            if (item.title) {
+              const h3 = card.querySelector('h3');
+              if (h3) h3.textContent = item.title;
+            }
+            if (item.image) {
+              const imgBox = card.querySelector('.card-img');
+              if (imgBox) imgBox.innerHTML = `<img src="${item.image}" alt="${item.title || ''}" style="width:100%;height:100%;object-fit:contain;">`;
+              if (imgBox) {
+                imgBox.style.background = '#fff';
+              }
+            }
+            if (item.price) {
+              const priceEl = card.querySelector('.price');
+              if (priceEl) priceEl.textContent = item.price;
+            }
+            // Note: buy-btn href is intentionally left alone — it points to
+            // /go/<asin>, which redirects based on visitor country. See middleware.js.
+          });
+        })
+        .catch(() => {
+          // Live data unavailable (API not configured, offline, etc.) —
+          // the card's original static content stays as-is.
+        });
+    }
+  })();
+</script>
+
+</body>
+</html>
